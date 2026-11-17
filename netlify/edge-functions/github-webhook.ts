@@ -1,10 +1,14 @@
+const apiKey = Deno.env.get("WEBHOOK_API_KEY");
+if (!apiKey) {
+  throw new Error("WEBHOOK_API_KEY environment variable is not set");
+}
+
 export default async (req: Request): Promise<Response> => {
   if (req.method !== "POST") {
     return Response.json({ error: "Method not allowed" }, { status: 405 });
   }
 
-  const apiKey = Deno.env.get("WEBHOOK_API_KEY");
-  if (!apiKey || req.headers.get("x-api-key") !== apiKey) {
+  if (req.headers.get("x-api-key") !== apiKey) {
     return Response.json({ error: "Unauthorized" }, { status: 401 });
   }
 
