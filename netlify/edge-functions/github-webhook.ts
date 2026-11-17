@@ -5,10 +5,12 @@ if (!apiKey) {
 
 export default async (req: Request): Promise<Response> => {
   if (req.method !== "POST") {
+    console.error("Method not allowed:", req.method);
     return Response.json({ error: "Method not allowed" }, { status: 405 });
   }
 
   if (req.headers.get("x-api-key") !== apiKey) {
+    console.error("Unauthorized request");
     return Response.json({ error: "Unauthorized" }, { status: 401 });
   }
 
