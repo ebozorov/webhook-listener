@@ -2,7 +2,9 @@
 
 GitHub webhook so'rovlarini qabul qiluvchi Netlify Edge Function (Deno).
 
-## Endpoint
+## Endpointlar
+
+`GET /` — ochiq, statik `public/index.html` (CDN orqali) qaytaradi.
 
 `POST /api/webhooks/github`
 
